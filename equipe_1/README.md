@@ -1,1 +1,1 @@
-Equipe 1
+Equipe 1 - Alberto, Andressa, Lavinia, Igor, Valcirio
