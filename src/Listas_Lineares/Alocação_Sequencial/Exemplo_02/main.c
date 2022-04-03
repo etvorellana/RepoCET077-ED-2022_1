@@ -37,7 +37,7 @@ int main(void)
     */
     tamLista = 0; //Lista inicialmente vazia
     // Uma lista como uma array alocado estaticamente
-    TAluno lista[LSIZE];
+    TAluno lista[capLista];
 
     printf("Testando Listas Lineares Sequenciais\n");
 

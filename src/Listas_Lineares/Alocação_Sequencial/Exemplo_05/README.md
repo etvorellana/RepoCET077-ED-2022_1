@@ -13,3 +13,4 @@ Exemplos para a disciplina de Estrutura de Dados
     * não é necessário verificar se é último elemento porque o algoritmo sempre para antes;  
 * Caso o primeiro elemento da sub lista não tenha chave igual à procurada, se faz uma chamada recursiva passando a sub lista menor (tam - 1), começando no segundo elemento (&lista[1]).    
 * Com base na implementação recursiva é possível determinar que a função de busca ainda tem Complexidade da ordem de n (O(n));
+* Modificando a função de remoção, diminuindo o número de operações. O elemento a ser removido é substituído pelo último elemento da lista.

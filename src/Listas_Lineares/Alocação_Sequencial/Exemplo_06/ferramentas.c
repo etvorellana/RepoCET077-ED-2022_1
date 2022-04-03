@@ -95,12 +95,10 @@ int remAluno(int chave, TAluno lista[], int *tam){
         return FALSE; //lista vazia
     int pos = buscaAluno(lista, *tam, chave);
     if (pos < *tam){
-        for(int i = pos; i < *tam - 1 ; i++){
-            lista[i].numMatricula = lista[i+1].numMatricula;
-            strcpy(lista[i].nome, lista[i+1].nome);
-            strcpy(lista[i].email, lista[i+1].email);
-        }
         *tam -= 1;
+        lista[pos].numMatricula = lista[*tam].numMatricula;
+        strcpy(lista[pos].nome, lista[*tam].nome);
+        strcpy(lista[pos].email, lista[*tam].email);
         return TRUE;
     }else
         return FALSE;
