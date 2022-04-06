@@ -32,40 +32,33 @@ int buscaAlunoR(TAluno lista[], int tam, int chave)
 }
 */
 
+void trocaAlunos(TAluno *aluno1, TAluno *aluno2){
+    TAluno troca;
+    troca.numMatricula = aluno1->numMatricula;
+    strcpy(troca.nome, aluno1->nome);
+    strcpy(troca.email, aluno1->email);
+                
+    aluno1->numMatricula = aluno2->numMatricula;
+    strcpy(aluno1->nome, aluno2->nome);
+    strcpy(aluno1->email, aluno2->email);
+
+    aluno2->numMatricula = troca.numMatricula;
+    strcpy(aluno2->nome, troca.nome);
+    strcpy(aluno2->email, troca.email);
+}
+
 int incAluno(TAluno aluno, TAluno lista[], int *tam, int cap)
 {   
     if (*tam == cap)
         return FALSE; //lista cheia
     int pos = buscaAluno(lista, *tam, aluno.numMatricula);
-	if ( pos == *tam){
-		strcpy(lista[*tam].nome, aluno.nome);
-		strcpy(lista[*tam].email, aluno.email);
+	if((lista[pos].numMatricula != aluno.numMatricula) || (pos == *tam)){
+        for(int i = pos; i <= *tam; i++)
+            trocaAlunos(&lista[i], &aluno);
         *tam += 1;
         return TRUE;
-	}else{
-        if(lista[pos].numMatricula != aluno.numMatricula){
-            TAluno troca;
-            for(int i = pos; i < *tam; i++){
-                troca.numMatricula = lista[i].numMatricula;
-                strcpy(troca.nome, lista[i].nome);
-                strcpy(troca.email, lista[i].email);
-                
-                lista[i].numMatricula = aluno.numMatricula;
-                strcpy(lista[i].nome, aluno.nome);
-                strcpy(lista[i].email, aluno.email);
-
-                aluno.numMatricula = troca.numMatricula;
-                strcpy(aluno.nome, troca.nome);
-                strcpy(aluno.email, troca.email);
-            }
-            lista[*tam].numMatricula = aluno.numMatricula;
-            strcpy(lista[*tam].nome, aluno.nome);
-            strcpy(lista[*tam].email, aluno.email);
-            *tam += 1;
-            return TRUE;
-        }else
-            return FALSE;
-    }   
+    }else
+        return FALSE; 
 }
 
 int remAluno(int chave, TAluno lista[], int *tam){
@@ -73,11 +66,8 @@ int remAluno(int chave, TAluno lista[], int *tam){
         return FALSE; //lista vazia
     int pos = buscaAluno(lista, *tam, chave);
     if (pos < *tam && lista[pos].numMatricula == chave){
-        for(int i = pos; i < *tam - 1 ; i++){
-            lista[i].numMatricula = lista[i+1].numMatricula;
-            strcpy(lista[i].nome, lista[i+1].nome);
-            strcpy(lista[i].email, lista[i+1].email);
-        }
+        for(int i = pos; i < *tam - 1 ; i++)
+            trocaAlunos(&lista[i], &lista[i+1]);
         *tam -= 1;
         return TRUE;
     }else

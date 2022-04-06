@@ -62,8 +62,7 @@ int main(void)
     // Adicionando um novo item na lista com chave repetida
     // Mengano Martins Pereira 201913425   menmarper@uesc.br
     //if (buscaAluno(lista, tamLista, 201913425) == tamLista)
-    if (buscaAlunoR(lista, tamLista, 201913425) == tamLista)
-    {
+    if (buscaAlunoR(lista, tamLista, 201913425) == tamLista){
         lista[tamLista].numMatricula = 201913425;
         strcpy(lista[tamLista].nome, "Mengano Martins Pereira");
         strcpy(lista[tamLista].email, "menmarper@uesc.br");
@@ -71,15 +70,12 @@ int main(void)
         printf("Item inserido com sucesso!!!\n");
     }
     else
-    {
         printf("Já tem Aluno na lista com matrícula 201913425\n");
-    }
 
     // Adicionando um novo item na lista
     // Mengano Martins Pereira 201913245   menmarper@uesc.br
     //if (buscaAluno(lista, tamLista, 201913245) == tamLista)
-    if (buscaAlunoR(lista, tamLista, 201913245) == tamLista)
-    {
+    if (buscaAlunoR(lista, tamLista, 201913245) == tamLista){
         lista[tamLista].numMatricula = 201913245;
         strcpy(lista[tamLista].nome, "Mengano Martins Pereira");
         strcpy(lista[tamLista].email, "menmarper@uesc.br");
@@ -87,15 +83,12 @@ int main(void)
         printf("Item inserido com sucesso!!!\n");
     }
     else
-    {
         printf("Aluno já está na lista\n");
-    }
 
     // Adicionando um novo item na lista
     // Fulano Silva Oliveira   201912345   fulsiloli@uesc.br
-    if (buscaAluno(lista, tamLista, 201912345) == tamLista)
-    //if (buscaAlunoR(lista, tamLista, 201912345) == tamLista)
-    {
+    if (buscaAluno(lista, tamLista, 201912345) == tamLista){
+    //if (buscaAlunoR(lista, tamLista, 201912345) == tamLista){
         lista[tamLista].numMatricula = 201912345;
         strcpy(lista[tamLista].nome, "Fulano Silva Oliveira");
         strcpy(lista[tamLista].email, "fulsiloli@uesc.br");
@@ -103,9 +96,7 @@ int main(void)
         printf("Item inserido com sucesso!!!\n");
     }
     else
-    {
         printf("Aluno já está na lista\n");
-    }
 
     // Imprimindo a lista
     printf("[ \n ");
@@ -129,9 +120,9 @@ int main(void)
         }
         tamLista--;
         printf("Item removido com sucesso!!!\n");
-    }else{
+    }else
         printf("Aluno não está na lista\n");
-    }
+    
     // remover item com número de matrícula 201813245
     remover = 201813245;
     pos = buscaAluno(lista, tamLista, remover);
@@ -143,9 +134,9 @@ int main(void)
         }
         tamLista--;
         printf("Item removido com sucesso!!!\n");
-    }else{
+    }else
         printf("Aluno não está na lista\n");
-    }
+    
     
     // Imprimindo a lista
     printf("[ \n ");

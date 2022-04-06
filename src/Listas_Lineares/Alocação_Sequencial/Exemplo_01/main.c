@@ -74,8 +74,7 @@ int main(void)
 
     // Adicionando um novo item na lista
     // Mengano Martins Pereira 201913245   menmarper@uesc.br
-    if (lista[0].numMatricula != 201913245)
-    {
+    if (lista[0].numMatricula != 201913245){
         lista[tamLista].numMatricula = 201913245;
         strcpy(lista[tamLista].nome, "Mengano Martins Pereira");
         strcpy(lista[tamLista].email, "menmarper@uesc.br");
@@ -83,14 +82,11 @@ int main(void)
         printf("Item inserido com sucesso!!!\n");
     }
     else
-    {
         printf("Aluno já está na lista\n");
-    }
 
     // Adicionando um novo item na lista
     // Fulano Silva Oliveira   201912345   fulsiloli@uesc.br
-    if (lista[0].numMatricula != 201912345 && lista[1].numMatricula != 201912345)
-    {
+    if (lista[0].numMatricula != 201912345 && lista[1].numMatricula != 201912345){
         lista[tamLista].numMatricula = 201912345;
         strcpy(lista[tamLista].nome, "Fulano Silva Oliveira");
         strcpy(lista[tamLista].email, "fulsiloli@uesc.br");
@@ -98,9 +94,7 @@ int main(void)
         printf("Item inserido com sucesso!!!\n");
     }
     else
-    {
         printf("Aluno já está na lista\n");
-    }
 
     // Imprimindo a lista
     printf("[ \n ");
