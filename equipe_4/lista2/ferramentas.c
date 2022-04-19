@@ -268,7 +268,12 @@ TListAlunos* difListas(TListAlunos *listaA, TListAlunos *listaB){
 
 }
 
-TListAlunos* intListas(TListAlunos *listaA, TListAlunos *listaB){
+void intListas(TListAlunos *listaA, TListAlunos *listaB, TListAlunos *listaC){
+    for(int i = 0; i < listaA->tam; i++){
+        if(buscaChaveNaLista(listaA->lista[i].numMatricula, listaB)){
+            incAlunoNaLista(listaA->lista[i], listaC);
+        }
+    }
     /*
         Retorna uma nova lista formada pela intersecção da 
         listaA com a listaB, que representa os elementos 
