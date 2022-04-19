@@ -264,6 +264,7 @@ TListAlunos* difListas(TListAlunos *listaA, TListAlunos *listaB){
     */
    // A[1,2,4,6,8] - B[1,4,5,7,8]
    //Resultado[2,6]
+   
 
 }
 
@@ -302,6 +303,14 @@ void printLista(TAluno lista[], int tam){
         Utilizar a implementação ja disponível nos
         exemplos anteriores.
     */
+    printf("[ \n ");
+    for (int i = 0; i < tam; i++)
+    {
+        printf("%d, ", lista[i].numMatricula);
+        printf("%s, ", lista[i].nome);
+        printf("%s;\n ", lista[i].email);
+    }
+    printf(" ]\n");
 }
 TListAlunos* geraListaDeAlunos(int tam, int cap, int eOrd){
     /*
@@ -317,4 +326,17 @@ TListAlunos* geraListaDeAlunos(int tam, int cap, int eOrd){
         * Os campos nome e email dos itens podem ser
         preenchidos com um valor padrão qualquer.
     */
+   TListAlunos *lAlunos = iniListAlunos(cap, eOrd);
+    for (int i = 0; i < tam;)
+    {
+        TAluno aluno;
+        // matricula = ano + semestre + sequencia aleatoria
+        aluno.numMatricula = ((2000 + random()%22)* 100000) + ((1 + random()%2)* 10000) + random()%900; 
+        strcpy(aluno.nome, "Nome Sobrenome UltimoNome");
+        strcpy(aluno.email,"NSUn@gmail.com");
+
+        if (incAlunoNaLista(aluno, lAlunos))
+            i++;
+    }
+    return lAlunos;
 }
