@@ -1,0 +1,117 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+#include "ferramentas.h"
+
+
+// Manipulação de listas não ordenadas
+int buscaAluno_NOrd(TAluno lista[], int tam, int chave){
+    int i = 0;
+	while (i < tam)
+	{
+		if (lista[i].numMatricula == chave)
+			return i; //achou retorna o índice
+		i++;
+	}
+	return tam; //não achou, retorna tamLista
+}
+int incAluno_NOrd(TAluno aluno, TAluno lista[], int *tam, int cap){
+    if (*tam == cap){
+        return FALSE; //lista cheia
+    }
+	if (buscaAluno_NOrd(lista, *tam, aluno.numMatricula) == *tam){
+		lista[*tam].numMatricula = aluno.numMatricula;
+		strcpy(lista[*tam].nome, aluno.nome);
+		strcpy(lista[*tam].email, aluno.email);
+        *tam += 1;
+        return TRUE;
+	}else{
+        return FALSE;
+    }
+}
+int remAluno_NOrd(int chave, TAluno lista[], int *tam){
+    if(*tam == 0)
+        return FALSE; //lista vazia
+    int pos = buscaAluno_NOrd(lista, *tam, chave);
+    if (pos < *tam){
+        *tam -= 1;
+        lista[pos].numMatricula = lista[*tam].numMatricula;
+        strcpy(lista[pos].nome, lista[*tam].nome);
+        strcpy(lista[pos].email, lista[*tam].email);
+        return TRUE;
+    }else
+        return FALSE;
+}
+
+// Manipulação de listas ordenadas
+int buscaAluno_Ord(TAluno lista[], int tam, int chave){
+    int min = 0, max = tam, i;
+    while (min != max)      {
+        i = (max + min) / 2;
+        if (lista[i].numMatricula < chave)
+            min = ++i;
+        else
+            if (lista[i].numMatricula > chave)
+                max = i;
+            else
+                return i;
+    }
+    return i;
+}
+int incAluno_Ord(TAluno aluno, TAluno lista[], int *tam, int cap){
+    if (*tam == cap)
+        return FALSE; //lista cheia
+    int pos = buscaAluno_Ord(lista, *tam, aluno.numMatricula);
+	if ( pos == *tam){
+        lista[*tam].numMatricula = aluno.numMatricula;
+		strcpy(lista[*tam].nome, aluno.nome);
+		strcpy(lista[*tam].email, aluno.email);
+        *tam += 1;
+        return TRUE;
+	}else{
+        if(lista[pos].numMatricula != aluno.numMatricula){
+            for(int i = *tam; i > pos; i--){ //Vai do ultimo valor até pos
+                lista[i].numMatricula = lista[i-1].numMatricula; //Vai andando pra esquerda do vetor, colocando o elemento encontrado mais a direita até a achar a pos que deve ser inserido o novo valor.
+                strcpy(lista[i].nome, lista[i-1].nome);
+                strcpy(lista[i].email, lista[i-1].email);
+            }
+            lista[pos].numMatricula = aluno.numMatricula; // Quando encontra a posição, sai do laçõ for e insere o novo valor;
+            strcpy(lista[pos].nome, aluno.nome);
+            strcpy(lista[pos].email, aluno.email);
+            *tam += 1; //Aumenta o tamanho da lista
+            return TRUE;
+        }else
+            return FALSE;
+    }
+}
+int remAluno_Ord(int chave, TAluno lista[], int *tam){
+    if(*tam == 0)
+        return FALSE; //lista vazia
+    int pos = buscaAluno_Ord(lista, *tam, chave);
+    if (pos < *tam && lista[pos].numMatricula == chave){
+        for(int i = pos; i < *tam - 1 ; i++){
+            lista[i].numMatricula = lista[i+1].numMatricula;
+            strcpy(lista[i].nome, lista[i+1].nome);
+            strcpy(lista[i].email, lista[i+1].email);
+        }
+        *tam -= 1;
+        return TRUE;
+    }else
+        return FALSE;
+}
+void printLista(TListAlunos *listas){
+    if(listas->tam == 0){
+        printf("Lista Vazia!!!");
+    }
+    else{
+        for(int i = 0; i < listas->tam; i++){
+            printf("\n");
+            printf("Numero de Matricula: %d\n", listas->lista[i].numMatricula);
+            printf("Nome do Aluno: %s\n", listas->lista[i].nome);
+            printf("Email do Aluno: %s\n", listas->lista[i].email);
+            printf("\n");
+        }
+    }
+}
