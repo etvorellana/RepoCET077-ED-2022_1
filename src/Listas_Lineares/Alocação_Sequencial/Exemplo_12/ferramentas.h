@@ -1,6 +1,6 @@
 #define TRUE 1
 #define FALSE 0
-#define LSIZE 100
+#define LSIZE 10
 
 // Armazenando as informações de um aluno
 typedef struct
@@ -29,6 +29,7 @@ typedef struct{
 
 // Utilizar isto aqui no projeto 
 TListAlunos* iniListAlunos(int cap, int eOrd);
+void iniListAlunosPar(TListAlunos *lista, int cap, int eOrd);
 int buscaChaveNaLista(int chave, TListAlunos *lista);
 int incAlunoNaLista(TAluno aluno, TListAlunos *lista);
 int remAlunoDaLista(TAluno aluno, TListAlunos *lista);
@@ -62,4 +63,6 @@ typedef struct{
 void iniFilaAlunos(TFilaAlunos* fila, int cap);
 int insereNaFila(TAluno aluno, TFilaAlunos* fila);
 int removeDaFila(TAluno* aluno, TFilaAlunos* fila);
+
+
 

@@ -30,6 +30,8 @@ typedef struct{
 
 // Utilizar isto aqui no projeto 
 TListAlunos* iniListAlunos(int cap, int eOrd);
+void iniListAlunosPar(TListAlunos *lista, int cap, int eOrd);
+
 int buscaChaveNaLista(int chave, TListAlunos *lista);
 int incAlunoNaLista(TAluno aluno, TListAlunos *lista);
 int remAlunoDaLista(TAluno aluno, TListAlunos *lista);
