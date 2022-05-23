@@ -522,7 +522,6 @@ int desempilharALunoEnc(TAluno* aluno, TPilhaEncAlunos* pilha){
 
 
     pilha->topo = aux->prox; // Topo aponta para o proximo no
-    aux->prox = NULL; // O no que era o antigo topo agora aponta pra NULL
 
     aluno->numMatricula = aux->numMatricula; //Passo os dados do no para um TAluno
     strcpy(aluno->nome, aux->nome);
@@ -596,7 +595,6 @@ int removeDaFilaEnc(TAluno* aluno, TFilaEncAlunos* fila){
     }
 
     fila->head = aux->prox;
-    aux->prox = NULL;
 
     aluno->numMatricula = aux->numMatricula; //Passo os dados do no para um TAluno
     strcpy(aluno->nome, aux->nome);

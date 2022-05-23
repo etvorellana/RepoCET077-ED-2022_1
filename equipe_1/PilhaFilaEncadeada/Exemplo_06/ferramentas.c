@@ -5,10 +5,10 @@
 
 #include "ferramentas.h"
 
-// Manipulação de listas não ordenadas
+// Manipulaï¿½ï¿½o de listas nï¿½o ordenadas
 int buscaAluno_NOrd(TAluno lista[], int tam, int chave)
 {
-    // Copiando a chave para a posição tam (fora da lista)
+    // Copiando a chave para a posiï¿½ï¿½o tam (fora da lista)
     lista[tam].numMatricula = chave;
     int i = 0;
     while (lista[i].numMatricula != chave)
@@ -45,7 +45,7 @@ int remAluno_NOrd(int chave, TAluno lista[], int *tam)
         return FALSE;
 }
 
-// Manipulação de listas ordenadas
+// Manipulaï¿½ï¿½o de listas ordenadas
 int buscaAluno_Ord(TAluno lista[], int tam, int chave)
 {
     int min = 0, max = tam, i;
@@ -167,13 +167,13 @@ int remAlunoDaLista(TAluno aluno, TListAlunos *lista)
 TListAlunos* uniaoListas(TListAlunos *listaA, TListAlunos *listaB)
 {
     /*
-        a capacidade da lista de saída se calcula como a soma
+        a capacidade da lista de saï¿½da se calcula como a soma
         do tamanho da listaA e o tamanho da lista B.
     */
     int cap = listaA->tam + listaB->tam;
     /*
         caso as listas de entrada seja de tipos diferentes a
-        lista de saída será igual a tipo da listaA
+        lista de saï¿½da serï¿½ igual a tipo da listaA
     */
     int eOrd = listaA->eOrd;
     TListAlunos *listaC = iniListAlunos(cap, eOrd);
@@ -181,7 +181,7 @@ TListAlunos* uniaoListas(TListAlunos *listaA, TListAlunos *listaB)
     for (int i = 0; i < listaA->tam; i++)
         listaC->lista[i] = listaA->lista[i];
     listaC->tam = listaA->tam;
-    // colocando os elementos de B que não estão em A
+    // colocando os elementos de B que nï¿½o estï¿½o em A
     for (int i = 0; i < listaB->tam; i++)
         incAlunoNaLista(listaB->lista[i], listaC);
     return listaC;
@@ -190,11 +190,11 @@ TListAlunos* uniaoListas(TListAlunos *listaA, TListAlunos *listaB)
 TListAlunos* diferenListas(TListAlunos *listaA, TListAlunos *listaB)
 {
 
-    // a capacidade da lista de saída é o tamanho da listaA.
+    // a capacidade da lista de saï¿½da ï¿½ o tamanho da listaA.
     int cap = listaA->tam;
     /*
         caso as listas de entrada seja de tipos diferentes a
-        lista de saída será igual a tipo da listaA
+        lista de saï¿½da serï¿½ igual a tipo da listaA
     */
     int eOrd = listaA->eOrd;
     TListAlunos *listaC = iniListAlunos(cap, eOrd);
@@ -226,13 +226,13 @@ TListAlunos* diferenListas(TListAlunos *listaA, TListAlunos *listaB)
 TListAlunos *interListas(TListAlunos *listaA, TListAlunos *listaB)
 {
     /*
-        a capacidade da lista de saída é o menor valor entre
+        a capacidade da lista de saï¿½da ï¿½ o menor valor entre
         o tamanho da listaA e da listaB.
     */
     int cap = (listaA->tam < listaB->tam) ? listaA->tam:listaB->tam;
     /*
         caso as listas de entrada seja de tipos diferentes a
-        lista de saída será igual a tipo da listaA
+        lista de saï¿½da serï¿½ igual a tipo da listaA
     */
     int eOrd = listaA->eOrd;
     TListAlunos *listaC = iniListAlunos(cap, eOrd);
@@ -273,7 +273,7 @@ void ordenaListaBolha(TAluno lista[], int tam){
             }
         }
         if (!trocou){
-            printf("Parou na iteração %d de %d\n", i, tam - 2);
+            printf("Parou na iteraï¿½ï¿½o %d de %d\n", i, tam - 2);
             break;
         }
     }
@@ -295,7 +295,7 @@ void ordenaListaBolhaPlus(TAluno lista[], int tam){
             }
         }
         if (!trocou){
-            printf("Parou na iteração %d de %d\n", i, tam - 2);
+            printf("Parou na iteraï¿½ï¿½o %d de %d\n", i, tam - 2);
             break;
         }
         bolha = lista[tam - i - 2];
@@ -310,7 +310,7 @@ void ordenaListaBolhaPlus(TAluno lista[], int tam){
             }
         }
         if (!trocou){
-            printf("Parou no retorno da iteração %d de %d\n", i, tam - 2);
+            printf("Parou no retorno da iteraï¿½ï¿½o %d de %d\n", i, tam - 2);
             break;
         }
     }
@@ -465,10 +465,10 @@ void printFila(TFilaAlunos* fila){
 void colocaPilhaFila(TListAlunos* alunos, TPilhaAlunos* palunos, TFilaAlunos* falunos, int DATA){
     TAluno aux;
     for(int i = 0; i < LSIZE; i++){ //Vou percorrer a lista inteira
-        if((alunos->lista[i].numMatricula / 10000) == DATA) //Verifico se o aluno é calouro
+        if((alunos->lista[i].numMatricula / 10000) == DATA) //Verifico se o aluno ï¿½ calouro
             empilharAluno(alunos->lista[i], palunos); //Se for calouro eu empilho
         else
-            insereNaFila(alunos->lista[i], falunos); //Se não for eu coloco na fila
+            insereNaFila(alunos->lista[i], falunos); //Se nï¿½o for eu coloco na fila
     }
 
     for(int i = 0; i < LSIZE; i++){ //Removo todos os elementos da minha lista
@@ -495,10 +495,10 @@ void iniPilhaEncAlunos(TPilhaEncAlunos* pilha){
 
 int empilharAlunoEnc(TAluno aluno, TPilhaEncAlunos* pilha){
 
-    PNoAluno aux = (PNoAluno)malloc(sizeof(TNoAluno)); //Aloco o espaço de um PNoAluno em uma variavel auxiliar do tipo PNoAluno
+    PNoAluno aux = (PNoAluno)malloc(sizeof(TNoAluno)); //Aloco o espaï¿½o de um PNoAluno em uma variavel auxiliar do tipo PNoAluno
 
-    if(aux == NULL){  //Verifico se a alocação foi bem sucedida
-        printf("ERRO DE ALOCAÇÃO!!");
+    if(aux == NULL){  //Verifico se a alocaï¿½ï¿½o foi bem sucedida
+        printf("ERRO DE ALOCAï¿½ï¿½O!!");
         return FALSE;
     }
 
@@ -522,7 +522,6 @@ int desempilharALunoEnc(TAluno* aluno, TPilhaEncAlunos* pilha){
 
 
     pilha->topo = aux->prox; // Topo aponta para o proximo no
-    aux->prox = NULL; // O no que era o antigo topo agora aponta pra NULL
 
     aluno->numMatricula = aux->numMatricula; //Passo os dados do no para um TAluno
     strcpy(aluno->nome, aux->nome);
@@ -536,7 +535,7 @@ int desempilharALunoEnc(TAluno* aluno, TPilhaEncAlunos* pilha){
 void liberaPilha(TPilhaEncAlunos* pilha){
     TAluno aluno;
 
-    while(desempilharALunoEnc(&aluno, pilha)); //Desempilho até a pilha ficar vazia
+    while(desempilharALunoEnc(&aluno, pilha)); //Desempilho atï¿½ a pilha ficar vazia
 }
 
 void imprimePilha(TPilhaEncAlunos* pilha){
@@ -562,10 +561,10 @@ void iniFilaAlunosEnc(TFilaEncAlunos* fila){
 
 int insereNaFilaEnc(TAluno aluno, TFilaEncAlunos* fila){
 
-    PNoAluno aux = (PNoAluno)malloc(sizeof(TNoAluno)); //Aloco o espaço de um PNoAluno em uma variavel auxiliar do tipo PNoAluno
+    PNoAluno aux = (PNoAluno)malloc(sizeof(TNoAluno)); //Aloco o espaï¿½o de um PNoAluno em uma variavel auxiliar do tipo PNoAluno
 
-    if(aux == NULL){  //Verifico se a alocação foi bem sucedida
-        printf("ERRO DE ALOCAÇÃO!!");
+    if(aux == NULL){  //Verifico se a alocaï¿½ï¿½o foi bem sucedida
+        printf("ERRO DE ALOCAï¿½ï¿½O!!");
         return FALSE;
     }
 
@@ -575,11 +574,11 @@ int insereNaFilaEnc(TAluno aluno, TFilaEncAlunos* fila){
 
     aux->prox = NULL; //Aponto o ultimo elemento para NULL
 
-    if(fila->head == NULL){ //Verifico se é o primeiro elemento da fila a ser inserido
+    if(fila->head == NULL){ //Verifico se ï¿½ o primeiro elemento da fila a ser inserido
         fila->head = aux; //Se for o Head aponta pra ele
     }
     else{
-        fila->tail->prox = aux; //Senão o proximo elemento do tail aponta pra ele
+        fila->tail->prox = aux; //Senï¿½o o proximo elemento do tail aponta pra ele
     }
 
     fila->tail = aux; //E o tail aponta pra ele tambem
@@ -664,7 +663,6 @@ int removeFilaDePilha(TPilhaEncAlunos* pilha, FilaDePilhas* fila){
     }
 
     fila->head = aux->prox;
-    aux->prox = NULL;
 
     pilha = aux;
 
