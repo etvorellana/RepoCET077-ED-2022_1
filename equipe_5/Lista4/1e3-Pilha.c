@@ -87,7 +87,8 @@ int removeJenga(TPilhaAlunoEnc* pilha, int indice){
         aux=aux->abaixo;
     }
     aux->abaixo = aux->abaixo->abaixo;
-    //free(aux);
+    aux=NULL;
+    free(aux);
     return 1;
 }
 
