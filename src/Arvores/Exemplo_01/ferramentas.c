@@ -635,6 +635,119 @@ void printArvore(PRaizArvAluno raiz, int modo)
 }
 
 
+PRaizArvAlunoAVL iniArvAlunoAVL(void)
+{
+	PRaizArvAlunoAVL no;  								
+    no = (PRaizArvAlunoAVL) malloc(sizeof(TRaizArvAlunoAVL)); 	
+    if(no)
+    {
+        no->esq = NULL;
+	    no->dir = NULL;					
+        no->altura = 0;
+    }
+    else
+        printf("\nERRO criando um novo nó!!!!!\n");
+	return no;
+}
+
+short alturaDoNoAVL(PRaizArvAlunoAVL no)
+{
+    if (no == NULL)
+        return -1;
+    else
+        return no->altura;
+}
+
+short balanceamento(PRaizArvAlunoAVL no)
+{
+    if(no)
+        return (alturaDoNoAVL(no->esq) - alturaDoNoAVL(no->dir));
+    else
+        return 0;
+}
+
+PRaizArvAlunoAVL rotaEsquerda(PRaizArvAlunoAVL raiz)
+{
+    PRaizArvAlunoAVL dir, esqDodir;
+    dir = raiz->dir;
+    esqDodir = dir->esq;
+
+    dir->esq = raiz;
+    raiz->dir = esqDodir;
+    short a = alturaDoNoAVL(raiz->esq);
+    short b = alturaDoNoAVL(raiz->dir);
+    raiz->altura = ((a > b) ? a : b) + 1;
+    a = alturaDoNoAVL(dir->esq); 
+    b = alturaDoNoAVL(dir->dir);
+    dir->altura = ((a > b) ? a : b) + 1;
+    return dir;
+}
+
+PRaizArvAlunoAVL rotaDireita(PRaizArvAlunoAVL raiz)
+{
+    PRaizArvAlunoAVL esq, dirDoesq;
+    esq = raiz->esq;
+    dirDoesq = esq->dir;
+
+    esq->dir = raiz;
+    raiz->esq = dirDoesq;
+    short a = alturaDoNoAVL(raiz->esq); 
+    short b = alturaDoNoAVL(raiz->dir);
+    raiz->altura = ((a > b) ? a : b) + 1;
+    a = alturaDoNoAVL(esq->esq); 
+    b = alturaDoNoAVL(esq->dir);
+    esq->altura = ((a > b) ? a : b) + 1;
+    return esq;
+}
+
+PRaizArvAlunoAVL rotaDirEsq(PRaizArvAlunoAVL raiz)
+{
+    raiz->dir = rotaDireita(raiz->dir);
+    return rotaEsquerda(raiz);
+}
+
+PRaizArvAlunoAVL rotaEsqDir(PRaizArvAlunoAVL raiz)
+{
+    raiz->esq = rotaEsquerda(raiz->esq);
+    return rotaDireita(raiz);
+}
+
+PRaizArvAlunoAVL incAlunoNaArvAVL(TAluno aluno, PRaizArvAlunoAVL raiz)
+{
+    if(raiz == NULL){
+        raiz = iniArvAlunoAVL();
+        raiz->aluno = aluno;
+    }else{
+        if (aluno.numMatricula != raiz->aluno.numMatricula){
+            int dir = (aluno.numMatricula > raiz->aluno.numMatricula);
+            if(dir == 1) // se for a direita
+                raiz->dir =  incAlunoNaArvAVL(aluno, raiz->dir); // inclui na sub-arv da direita
+            else // se não então é esquerda
+                raiz->esq =  incAlunoNaArvAVL(aluno, raiz->esq); // inclui na sub-arv da direita
+        }
+    }
+    short a = alturaDoNoAVL(raiz->esq); 
+    short b = alturaDoNoAVL(raiz->dir);
+    raiz->altura = ((a > b) ? a : b) + 1;
+    raiz = balancear(raiz);
+    return raiz;
+}
+
+PRaizArvAlunoAVL balancear(PRaizArvAlunoAVL raiz)
+{
+    short fb = balanceamento(raiz);
+    short fb_dir = balanceamento(raiz->dir);
+    short fb_esq = balanceamento(raiz->esq);
+    if(fb < -1 && fb_dir <= 0)
+        raiz = rotaEsquerda(raiz);
+    else if (fb > 1 && fb_esq >= 0)
+        raiz = rotaDireita;
+    else if (fb > 1 && fb_esq < 0)
+        raiz = rotaEsqDir(raiz);
+    else if(fb < -1 && fb_dir > 0)
+        raiz = rotaDirEsq(raiz);
+    return raiz;
+}
 
 /*
 [ 

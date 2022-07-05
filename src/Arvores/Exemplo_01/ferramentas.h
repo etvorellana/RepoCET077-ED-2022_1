@@ -92,8 +92,31 @@ PRaizArvAluno incAlunoNaArvOrd(TAluno aluno, PRaizArvAluno raiz);
 void printArvore(PRaizArvAluno raiz, int modo);
 
 
-/*
+//AVL Adelson, Velskii and Landis
 
+struct SNoAlunoAVL
+{
+    TAluno aluno;
+    struct SNoAlunoDE *dir; // Endereço do próximo elemento
+    struct SNoAlunoDE *esq; // Endereço do elemento anterior
+    short int altura;
+};
+
+typedef struct SNoAlunoAVL TRaizArvAlunoAVL;
+typedef TRaizArvAlunoAVL *PRaizArvAlunoAVL;
+
+PRaizArvAlunoAVL iniArvAlunoAVL(void);
+short alturaDoNoAVL(PRaizArvAlunoAVL no);
+short balanceamento(PRaizArvAlunoAVL no);
+PRaizArvAlunoAVL rotaEsquerda(PRaizArvAlunoAVL raiz);
+PRaizArvAlunoAVL rotaDireita(PRaizArvAlunoAVL raiz);
+PRaizArvAlunoAVL rotaDirEsq(PRaizArvAlunoAVL raiz);
+PRaizArvAlunoAVL rotaEsqDir(PRaizArvAlunoAVL raiz);
+PRaizArvAlunoAVL balancear(PRaizArvAlunoAVL raiz);
+PRaizArvAlunoAVL incAlunoNaArvAVL(TAluno aluno, PRaizArvAlunoAVL raiz);
+void printArvoreAVL(PRaizArvAlunoAVL raiz, int modo);
+
+/*
 PNoArvAluno buscaArvAlunoRec(PNoArvAluno raiz, int chave);
 PNoArvAluno buscaArvAluno(PNoArvAluno raiz, int chave);
 int incArvAlunoRec(TAluno aluno, PNoArvAluno *raiz);
