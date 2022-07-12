@@ -768,40 +768,51 @@ PRaizArvAlunoAVL buscaArvAlunoRecAVL(PRaizArvAlunoAVL raiz, int chave)
     return buscaArvAlunoRecAVL(raiz->esq, chave);
 }
 
-/*
-PRaizArvAlunoAVL buscaArvAlunoPaiAVL(PRaizArvAlunoAVL raiz, int chave, PRaizArvAlunoAVL pai)
+PRaizArvAlunoAVL procuraMenor(PRaizArvAlunoAVL atual) //função que procura o menor dos nos
 {
-    PRaizArvAlunoAVL atual = raiz;
-	pai = NULL;
-	while(atual){
-		if(atual->aluno.numMatricula == chave)
-			return(atual);
-		pai = atual;
-		if(atual->aluno.numMatricula < chave)
-            atual = atual->esq;
-		else
-            atual = atual->dir;
-	}
-	return(NULL);
-}*/
+    PRaizArvAlunoAVL no1 = atual;
+    PRaizArvAlunoAVL no2 = atual->esq;
+    while(no2 != NULL){
+        no1 = no2;
+        no2 = no2->esq;
+    }
+    return no1;
+}
 
-
-/*int remArvAlunoAVL(int aluno, PRaizArvAlunoAVL raiz)
+int remArvAlunoAVL(int aluno, PRaizArvAlunoAVL *raiz)
 {
-    if(raiz == NULL){
-        printf("Nao existe\n");
+    if(*raiz == NULL){
+        printf("Valor nao existe");
         return 0;
     }
-    if(aluno < raiz->aluno.numMatricula){
-        remArvAlunoAVL(&raiz->esq, aluno);
-    }
-    else{
-        if(aluno > raiz->aluno.numMatricula){
-            remArvAlunoAVL(&raiz->dir, aluno);
-        }
-    }
+    int rem; //Guardando a resposta da remoção
+    if(aluno < (*raiz)->aluno.numMatricula) //Verifico se é menor que a chave
+        if((rem = remArvAlunoAVL(aluno, &(*raiz)->esq)) == 1)//Chamo a função passando a subarvore da esquerda
+            balancear(*raiz); //Efetuo o balanceamento da arvore caso seja necessario
 
-}*/
+    if((*raiz)->aluno.numMatricula < aluno) //Verifico se é maior que a chave
+        if((rem = remArvAlunoAVL(aluno, &(*raiz)->dir)) == 1)//Chamo a função passando a subarvore da direita
+            balancear(*raiz);//Efetuo o balanceamento da arvore caso seja necessario
+
+    if((*raiz)->aluno.numMatricula == aluno){//Achei a chave procurada
+        if(((*raiz)->esq == NULL || (*raiz)->dir == NULL)){ //No pai so tem 1 filho ou nenhum
+            PRaizArvAlunoAVL aux = (*raiz);
+            if((*raiz)->esq != NULL)//Verifico se tenho filho na esquerda
+                *raiz = (*raiz)->esq;
+            else
+                *raiz = (*raiz)->dir;//Ou filho na direita
+            free(aux);//Libero o filho
+        }
+        else{//No pai tem 2 filhos
+            PRaizArvAlunoAVL temp = procuraMenor((*raiz)->dir);//Chamo uma função que procura o menor na direita
+            (*raiz)->aluno = temp->aluno;//Copio as informações encontradas no menor no da direita pro meu no raiz
+            remArvAlunoAVL((*raiz)->aluno.numMatricula, &(*raiz)->dir);//Chamo recursivamente para remover o valor encontrado em temp
+            balancear(*raiz);
+        }
+        return 1;
+    }
+    return rem;
+}
 
 PRaizArvAluno buscaArvAlunoOrd(PRaizArvAluno raiz, int chave)
 {
@@ -814,30 +825,57 @@ PRaizArvAluno buscaArvAlunoOrd(PRaizArvAluno raiz, int chave)
     return buscaArvAlunoOrd(raiz->esq, chave);
 }
 
-/*PRaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *pai)
+PRaizArvAluno remAtualOrd(PRaizArvAluno atual) //função que remove o no atual
 {
+    PRaizArvAluno no1, no2;
+    if(atual->esq == NULL){//verifico se não tem filho a esquerda ou se é sem filho
+        no2 = atual->dir; //passo o no da direita, caso não tenha estou passando null
+        free(atual); //libero o no atual
+        return no2; //e retorno o no filho ou null caso não tenha
+    }
+    no1 = atual;
+    no2 = atual->esq;
+    while(no2->dir != NULL){//Procura o maior no da subarvore da esquerda
+        no1 = no2; //troca de posicoes
+        no2 = no2->dir; //ate encontrar o maior no da esquerda
+    }
+    if(no1 != atual){//Verifico se meu no1 não é o atual
+        no1->dir = no2->esq; //Pego a direita do meu no1 e aponto pra esquerda do meu no2
+        no2->esq = atual->esq; //Pego a esquerda do meu no 2 e aponto pra esquerda do meu atual
+    }
+    no2->dir = atual->dir; //Meu no2 que agora é o maior elemento, aponta pra direita do no atual
+    free(atual);// libera o no atual
+    return no2;
+}
 
-    PRaizArvAluno atual = raiz;
-	*pai = NULL;
-	while(atual){
-		if(atual->aluno.numMatricula == chave)
-			return(atual);
-		*pai = atual;
-		if(atual->aluno.numMatricula)
-            atual = atual->esq;
-		else
+int remArvAlunoOrd(int aluno, PRaizArvAluno *raiz)
+{
+    if(raiz == NULL){
+        printf("Valor nao existe");
+        return 0;
+    }
+    PRaizArvAluno ant = NULL;
+    PRaizArvAluno atual = *raiz;
+    while(atual != NULL){ //Verifico se o valor é valido, enquanto for eu vou buscar a minha chave
+        if(aluno == atual->aluno.numMatricula){ //Verifico se a chave ta guardada no atual
+            if(atual == *raiz) //Verifico se o atual é a raiz
+                *raiz = remAtualOrd(atual);
+            else{ //Não é o conteudo da raiz
+                if(ant->dir == atual) //Verifico se é o conteudo do no da direita
+                    ant->dir = remAtualOrd(atual);
+                else //Ou da esquerda
+                    ant->esq = remAtualOrd(atual);
+            }
+        return 1;
+        } //A chave nao ta no atual, vou continuar andando na arvore
+        ant = atual;
+        if(aluno > atual->aluno.numMatricula)//Se a chave for maior que o no atual, eu ando pra direita
             atual = atual->dir;
-	}
-	return(NULL);
-}*/
-
-/*int remArvAlunoOrd(TAluno aluno, PRaizArvAluno raiz)
-{
-    PRaizArvAluno rem = buscaArvAlunoOrd(raiz, aluno.numMatricula);
-    int chave = rem->aluno.numMatricula;
-    liberarRaiz(rem);
-    return chave;
-}*/
+        else
+            atual = atual->esq; //Senão ando pra esquerda
+    }
+    return 0;
+}
 
 PRaizArvAluno buscaArvAluno(PRaizArvAluno raiz, int chave)
 {
@@ -849,12 +887,9 @@ PRaizArvAluno buscaArvAluno(PRaizArvAluno raiz, int chave)
     return buscaArvAluno(raiz->dir, chave);
 }
 
-/*int remArvAluno(TAluno aluno, PRaizArvAluno raiz)
+/*int remArvAluno(int aluno, PRaizArvAluno *raiz)
 {
-    PRaizArvAluno rem = buscaArvAluno(raiz, aluno.numMatricula);
-    int chave = rem->aluno.numMatricula;
-    liberarRaiz(rem);
-    return chave;
+
 }*/
 
 void printArvoreAVL(PRaizArvAlunoAVL raiz, int modo)

@@ -119,15 +119,15 @@ void printArvoreAVL(PRaizArvAlunoAVL raiz, int modo);
 
 //Implementar
 PRaizArvAlunoAVL buscaArvAlunoRecAVL(PRaizArvAlunoAVL raiz, int chave);
-//PRaizArvAlunoAVL buscaArvAlunoPaiAVL(PRaizArvAlunoAVL raiz, int chave, PRaizArvAlunoAVL pai);
-//int remArvAlunoAVL(int aluno, PRaizArvAlunoAVL raiz);
+int remArvAlunoAVL(int aluno, PRaizArvAlunoAVL *raiz);
+PRaizArvAlunoAVL procuraMenor(PRaizArvAlunoAVL atual);
 
 PRaizArvAluno buscaArvAlunoOrd(PRaizArvAluno raiz, int chave);
-//PRaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *pai);
-//int remArvAlunoOrd(TAluno aluno, PRaizArvAluno raiz);
+int remArvAlunoOrd(int aluno, PRaizArvAluno *raiz);
+PRaizArvAluno remAtualOrd(PRaizArvAluno atual);
 
 PRaizArvAluno buscaArvAluno(PRaizArvAluno raiz, int chave);
-//RaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *pai);
-//int remArvAluno(TAluno aluno, PRaizArvAluno raiz);
+PRaizArvAluno buscaArvAlunoPai(PRaizArvAluno raiz, int chave, PRaizArvAluno pai);
+//int remArvAluno(int aluno, PRaizArvAluno *raiz);
 
 PRaizArvAlunoAVL criarArvoreDeListaAVL(TListAlunos *listaS);
