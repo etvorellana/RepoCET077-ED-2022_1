@@ -86,7 +86,8 @@ typedef TRaizArvAluno *PRaizArvAluno;
 PRaizArvAluno iniArvAluno(void);
 PRaizArvAluno criarArvoreDeLista(TListAlunos listaS);
 PRaizArvAluno criarArvoreDeLista_C(TListAlunos listaS);
-PRaizArvAluno criarArvoreDeLista_(TListAlunos listaS);
+PRaizArvAluno criarArvoreDeLista_(TListAlunos *listaS);
+PRaizArvAluno criarArvoreDeLista__(TListAlunos *listaS);
 PRaizArvAluno incAlunoNaArv(TAluno aluno, PRaizArvAluno raiz);
 PRaizArvAluno incAlunoNaArvOrd(TAluno aluno, PRaizArvAluno raiz);
 void printArvore(PRaizArvAluno raiz, int modo);
@@ -118,13 +119,15 @@ void printArvoreAVL(PRaizArvAlunoAVL raiz, int modo);
 
 //Implementar
 PRaizArvAlunoAVL buscaArvAlunoRecAVL(PRaizArvAlunoAVL raiz, int chave);
-PRaizArvAlunoAVL buscaArvAlunoPaiAVL(PRaizArvAlunoAVL raiz, int chave, PRaizArvAlunoAVL *pai);
-int remArvAlunoAVL(TAluno aluno, PRaizArvAlunoAVL raiz);
-void liberarRaizAVL(PRaizArvAlunoAVL raiz);
-PRaizArvAluno buscaArvAlunoOrd(PRaizArvAluno raiz, int chave);
-PRaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *pai);
-void liberarRaiz(PRaizArvAluno raiz);
-int remArvAlunoOrd(TAluno aluno, PRaizArvAluno raiz);
-PRaizArvAluno buscaArvAluno(PRaizArvAluno raiz, int chave);
-int remArvAlunoOrd(TAluno aluno, PRaizArvAluno raiz);
+//PRaizArvAlunoAVL buscaArvAlunoPaiAVL(PRaizArvAlunoAVL raiz, int chave, PRaizArvAlunoAVL pai);
+//int remArvAlunoAVL(int aluno, PRaizArvAlunoAVL raiz);
 
+PRaizArvAluno buscaArvAlunoOrd(PRaizArvAluno raiz, int chave);
+//PRaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *pai);
+//int remArvAlunoOrd(TAluno aluno, PRaizArvAluno raiz);
+
+PRaizArvAluno buscaArvAluno(PRaizArvAluno raiz, int chave);
+//RaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *pai);
+//int remArvAluno(TAluno aluno, PRaizArvAluno raiz);
+
+PRaizArvAlunoAVL criarArvoreDeListaAVL(TListAlunos *listaS);

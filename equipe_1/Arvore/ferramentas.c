@@ -594,10 +594,19 @@ PRaizArvAluno incAlunoNaArvOrd(TAluno aluno, PRaizArvAluno raiz)
     return raiz;
 }
 
-PRaizArvAluno criarArvoreDeLista_(TListAlunos listaS){
+PRaizArvAluno criarArvoreDeLista_(TListAlunos *listaS)
+{
     PRaizArvAluno raiz = NULL;
-    for(int i = 0; i < listaS.tam; i++)
-        raiz = incAlunoNaArvOrd(listaS.lista[i], raiz);
+    for(int i = 0; i < listaS->tam; i++)
+        raiz = incAlunoNaArvOrd(listaS->lista[i], raiz);
+    return raiz;
+}
+
+PRaizArvAluno criarArvoreDeLista__(TListAlunos *listaS)
+{
+    PRaizArvAluno raiz = NULL;
+    for(int i = 0; i < listaS->tam; i++)
+        raiz = incAlunoNaArv(listaS->lista[i], raiz);
     return raiz;
 }
 
@@ -630,7 +639,6 @@ void printArvore(PRaizArvAluno raiz, int modo)
 	else
         printf("[ ]\n");
 }
-
 
 PRaizArvAlunoAVL iniArvAlunoAVL(void)
 {
@@ -760,39 +768,40 @@ PRaizArvAlunoAVL buscaArvAlunoRecAVL(PRaizArvAlunoAVL raiz, int chave)
     return buscaArvAlunoRecAVL(raiz->esq, chave);
 }
 
-PRaizArvAlunoAVL buscaArvAlunoPaiAVL(PRaizArvAlunoAVL raiz, int chave, PRaizArvAlunoAVL *pai)
+/*
+PRaizArvAlunoAVL buscaArvAlunoPaiAVL(PRaizArvAlunoAVL raiz, int chave, PRaizArvAlunoAVL pai)
 {
     PRaizArvAlunoAVL atual = raiz;
-	*pai = NULL;
+	pai = NULL;
 	while(atual){
 		if(atual->aluno.numMatricula == chave)
 			return(atual);
-		*pai = atual;
-		if(atual->aluno.numMatricula)
+		pai = atual;
+		if(atual->aluno.numMatricula < chave)
             atual = atual->esq;
 		else
             atual = atual->dir;
 	}
 	return(NULL);
-}
+}*/
 
-void liberarRaizAVL(PRaizArvAlunoAVL raiz)
-{
-	if (raiz){
-		liberarRaizAVL(raiz->esq);
-		liberarRaizAVL(raiz->dir);
-		free(raiz);
-	}
-}
 
-int remArvAlunoAVL(TAluno aluno, PRaizArvAlunoAVL raiz)
+/*int remArvAlunoAVL(int aluno, PRaizArvAlunoAVL raiz)
 {
-    PRaizArvAlunoAVL rem = buscaArvAlunoRecAVL(raiz, aluno.numMatricula);
-    int chave = rem->aluno.numMatricula;
-    liberarRaizAVL(rem);
-    balancear(raiz);
-    return chave;
-}
+    if(raiz == NULL){
+        printf("Nao existe\n");
+        return 0;
+    }
+    if(aluno < raiz->aluno.numMatricula){
+        remArvAlunoAVL(&raiz->esq, aluno);
+    }
+    else{
+        if(aluno > raiz->aluno.numMatricula){
+            remArvAlunoAVL(&raiz->dir, aluno);
+        }
+    }
+
+}*/
 
 PRaizArvAluno buscaArvAlunoOrd(PRaizArvAluno raiz, int chave)
 {
@@ -805,7 +814,7 @@ PRaizArvAluno buscaArvAlunoOrd(PRaizArvAluno raiz, int chave)
     return buscaArvAlunoOrd(raiz->esq, chave);
 }
 
-PRaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *pai)
+/*PRaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *pai)
 {
 
     PRaizArvAluno atual = raiz;
@@ -820,24 +829,15 @@ PRaizArvAluno buscaArvAlunoOrdPai(PRaizArvAluno raiz, int chave, PRaizArvAluno *
             atual = atual->dir;
 	}
 	return(NULL);
-}
+}*/
 
-void liberarRaiz(PRaizArvAluno raiz)
-{
-	if (raiz){
-		liberarRaiz(raiz->esq);
-		liberarRaiz(raiz->dir);
-		free(raiz);
-	}
-}
-
-int remArvAlunoOrd(TAluno aluno, PRaizArvAluno raiz)
+/*int remArvAlunoOrd(TAluno aluno, PRaizArvAluno raiz)
 {
     PRaizArvAluno rem = buscaArvAlunoOrd(raiz, aluno.numMatricula);
     int chave = rem->aluno.numMatricula;
     liberarRaiz(rem);
     return chave;
-}
+}*/
 
 PRaizArvAluno buscaArvAluno(PRaizArvAluno raiz, int chave)
 {
@@ -849,10 +849,48 @@ PRaizArvAluno buscaArvAluno(PRaizArvAluno raiz, int chave)
     return buscaArvAluno(raiz->dir, chave);
 }
 
-int remArvAluno(TAluno aluno, PRaizArvAluno raiz)
+/*int remArvAluno(TAluno aluno, PRaizArvAluno raiz)
 {
     PRaizArvAluno rem = buscaArvAluno(raiz, aluno.numMatricula);
     int chave = rem->aluno.numMatricula;
     liberarRaiz(rem);
     return chave;
+}*/
+
+void printArvoreAVL(PRaizArvAlunoAVL raiz, int modo)
+{
+    if(raiz != NULL)
+        switch (modo){
+        case 0:
+            printf("[ %d, ", raiz->aluno.numMatricula);
+		    printf("%s, ", raiz->aluno.nome);
+		    printf("%s ] ;\n ", raiz->aluno.email);
+            printArvoreAVL(raiz->esq, modo);
+            printArvoreAVL(raiz->dir, modo);
+            break;
+        case 1:
+            printArvoreAVL(raiz->esq, modo);
+            printf("[ %d, ", raiz->aluno.numMatricula);
+		    printf("%s, ", raiz->aluno.nome);
+		    printf("%s ] ;\n ", raiz->aluno.email);
+            printArvoreAVL(raiz->dir, modo);
+            break;
+        case 2:
+            printArvoreAVL(raiz->esq, modo);
+            printArvoreAVL(raiz->dir, modo);
+            printf("[ %d, ", raiz->aluno.numMatricula);
+		    printf("%s, ", raiz->aluno.nome);
+		    printf("%s ] ;\n ", raiz->aluno.email);
+            break;
+        }
+	else
+        printf("[ ]\n");
+}
+
+PRaizArvAlunoAVL criarArvoreDeListaAVL(TListAlunos *listaS)
+{
+    PRaizArvAlunoAVL raiz = NULL;
+    for(int i = 0; i < listaS->tam; i++)
+        raiz = incAlunoNaArvAVL(listaS->lista[i], raiz);
+    return raiz;
 }
