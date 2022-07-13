@@ -119,8 +119,8 @@ void printArvoreAVL(PRaizArvAlunoAVL raiz, int modo);
 PRaizArvAlunoAVL criarArvoreAVLDeLista(TListAlunos listaS);
 
 
+PRaizArvAluno buscaArvDeBusca(PRaizArvAluno raiz, int chave);
 PRaizArvAluno buscaArvBinaria(PRaizArvAluno raiz, int chave);
-PRaizArvAluno buscaArvSimples(PRaizArvAluno raiz, int chave);
 PRaizArvAluno removerRec(PRaizArvAluno raiz, int chave);
 PRaizArvAlunoAVL criarArvoreAVLDeLista_(TListAlunos listaS);
 void printArvoreAVL(PRaizArvAlunoAVL raiz, int modo);

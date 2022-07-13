@@ -748,7 +748,7 @@ PRaizArvAlunoAVL balancear(PRaizArvAlunoAVL raiz)
     return raiz;
 }
 
-PRaizArvAluno buscaArvSimples(PRaizArvAluno raiz, int chave){
+PRaizArvAluno buscaArvBinaria(PRaizArvAluno raiz, int chave){
   PRaizArvAluno aux;
   if(raiz == NULL){
       printf("A arvore não existe\n");
@@ -762,10 +762,10 @@ PRaizArvAluno buscaArvSimples(PRaizArvAluno raiz, int chave){
   }
   
   if(raiz->dir != NULL){
-    aux = buscaArvSimples(raiz->dir, chave);
+    aux = buscaArvBinaria(raiz->dir, chave);
   }
   if(raiz->esq != NULL){
-    aux = buscaArvSimples(raiz->esq, chave);
+    aux = buscaArvBinaria(raiz->esq, chave);
   }
 
   if(aux->aluno.numMatricula == chave){
@@ -816,7 +816,7 @@ PRaizArvAluno buscaArvSimplesPai(PRaizArvAluno raiz, int chave){
   }
 };*/
 
-PRaizArvAluno buscaArvBinaria(PRaizArvAluno raiz, int chave){
+PRaizArvAluno buscaArvDeBusca(PRaizArvAluno raiz, int chave){
   
     if(raiz == NULL){
       printf("A arvore não existe");
@@ -828,11 +828,11 @@ PRaizArvAluno buscaArvBinaria(PRaizArvAluno raiz, int chave){
     }
     else if(chave>raiz->aluno.numMatricula && raiz->dir != NULL){
       printf("Direita de %d: %d\n", raiz->aluno.numMatricula, raiz->dir->aluno.numMatricula);
-        return buscaArvBinaria(raiz->dir, chave);
+        return buscaArvDeBusca(raiz->dir, chave);
     }
     else if(chave<raiz->aluno.numMatricula && raiz->esq != NULL){
         printf("Esquerda de %d: %d\n", raiz->aluno.numMatricula, raiz->esq->aluno.numMatricula);
-        return buscaArvBinaria(raiz->esq, chave);
+        return buscaArvDeBusca(raiz->esq, chave);
     }
     else{
       printf("O aluno não foi encontrado!");
