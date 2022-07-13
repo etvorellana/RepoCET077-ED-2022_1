@@ -91,7 +91,6 @@ PRaizArvAluno incAlunoNaArv(TAluno aluno, PRaizArvAluno raiz);
 PRaizArvAluno incAlunoNaArvOrd(TAluno aluno, PRaizArvAluno raiz);
 void printArvore(PRaizArvAluno raiz, int modo);
 
-
 //AVL Adelson, Velskii and Landis
 
 struct SNoAlunoAVL
@@ -126,8 +125,12 @@ int remArvAluno(TAluno aluno, PNoArvAluno *raiz);
 */
 
 int RemoverNoArvDeBusca(PRaizArvAluno raiz, int matricula);
+PRaizArvAluno BuscarPaiArvDeBusca(PRaizArvAluno raiz, int matricula);
 PRaizArvAluno BuscarNoArvDeBusca(PRaizArvAluno raiz, int matricula);
 int RemoverNoArvBinaria(PRaizArvAluno raiz, int matricula);
 PRaizArvAluno BuscarNoArvBinaria(PRaizArvAluno raiz, int matricula);
 PRaizArvAlunoAVL BuscarNoArvAVL(PRaizArvAlunoAVL raiz, int matricula);
 void liberaArvore(TRaizArvAluno *raiz);
+
+int noDuplo(PRaizArvAluno no_procurado);
+int noDirecao(PRaizArvAluno no, int matricula);
