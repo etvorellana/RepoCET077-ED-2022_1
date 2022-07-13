@@ -91,6 +91,7 @@ PRaizArvAluno incAlunoNaArv(TAluno aluno, PRaizArvAluno raiz);
 PRaizArvAluno incAlunoNaArvOrd(TAluno aluno, PRaizArvAluno raiz);
 void printArvore(PRaizArvAluno raiz, int modo);
 
+
 //AVL Adelson, Velskii and Landis
 
 struct SNoAlunoAVL
@@ -124,13 +125,18 @@ PNoArvAluno buscaArvAlunoPai(PNoArvAluno raiz, int chave, PNoArvAluno *pai);
 int remArvAluno(TAluno aluno, PNoArvAluno *raiz);
 */
 
-int RemoverNoArvDeBusca(PRaizArvAluno raiz, int matricula);
-PRaizArvAluno BuscarPaiArvDeBusca(PRaizArvAluno raiz, int matricula);
-PRaizArvAluno BuscarNoArvDeBusca(PRaizArvAluno raiz, int matricula);
-int RemoverNoArvBinaria(PRaizArvAluno raiz, int matricula);
-PRaizArvAluno BuscarNoArvBinaria(PRaizArvAluno raiz, int matricula);
-PRaizArvAlunoAVL BuscarNoArvAVL(PRaizArvAlunoAVL raiz, int matricula);
-void liberaArvore(TRaizArvAluno *raiz);
+PRaizArvAlunoAVL criarArvoreDeListaAVL(TListAlunos *listaS);
+//IMPLEMENTAÇÕES 
+PRaizArvAlunoAVL buscaArvAlunoRecAVL(PRaizArvAlunoAVL raiz, int chave);
+PRaizArvAlunoAVL remAlunoNaArvAVL(PRaizArvAlunoAVL raiz, int chave)
 
-int noDuplo(PRaizArvAluno no_procurado);
-int noDirecao(PRaizArvAluno no, int matricula);
+PRaizArvAluno buscaArvAluno(PRaizArvAluno raiz, int chave);
+//int remArvAluno(TAluno aluno, PRaizArvAluno raiz);
+
+
+PRaizArvAluno removeAtualOrd(PRaizArvAluno atual)
+int removerOrd(TAluno aluno, PRaizArvAluno* raiz);
+PRaizArvAluno buscaArvAlunoOrd(PRaizArvAluno raiz, int chave);
+
+
+
